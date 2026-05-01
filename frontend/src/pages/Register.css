@@ -1,0 +1,21 @@
+.register-panel {
+    box-sizing: border-box;
+    margin: auto;
+    padding: 0 32px;
+    width: 400px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.register-title {
+    margin: 24px 0;
+}
+
+.register-button {
+    margin-top: 12px;
+}

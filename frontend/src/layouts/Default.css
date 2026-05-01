@@ -1,0 +1,15 @@
+.default-layout {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 12px 12px 12px;
+    max-width: 1000px;
+    height: 100%;
+}
+
+
+@media (min-width: 1000px) {
+    .default-layout {
+        margin: 0 auto;
+    }
+}

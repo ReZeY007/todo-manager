@@ -1,0 +1,34 @@
+.task {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    flex: 1 1;
+}
+
+.task__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.task__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task__actions button {
+    font-size: 14px;
+}
+
+.task__title {
+    font-size: 18px;
+    flex: 1 1;
+}
+
+.task__description {
+    resize: none;
+    flex: 1 1;
+    font-size: 16px;
+}

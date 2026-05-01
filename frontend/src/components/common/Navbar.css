@@ -1,0 +1,28 @@
+.navbar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    list-style: none;
+
+}
+
+.nav-link {
+    padding: 0.5em 1.33em;
+    background: var(--bg);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.1s ease-in-out;
+
+    &:hover {
+        background: var(--bg-light);
+        cursor: pointer;
+    }
+}

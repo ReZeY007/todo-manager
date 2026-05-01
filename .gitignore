@@ -1,0 +1,7 @@
+pyrightconfig.json
+*.vscode
+*.zed
+*.ropeproject
+*.venv
+*__pycache__
+users.db

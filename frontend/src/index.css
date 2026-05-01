@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+    --bg-hover: hsl(0, 0%, 24%);
+    --bg-light: hsl(0, 0%, 22%);
+    --bg-disabled: hsl(0, 0%, 18%);
+    --bg: hsl(0, 0%, 15%);
+    --bg-dark: hsl(0, 0%, 10%);
+    --danger-hover: hsl(0, 65%, 35%);
+    --danger: hsl(0, 65%, 42%);
+    --danger-border: hsl(0, 60%, 45%);
+    --border-color: hsl(0, 0%, 22%);
+    --border: solid 1px var(--border-color);
+    --border-radius: 0.75em;
+    --text: hsl(0, 0%, 90%);
+    --text-muted: hsl(0, 0%, 80%);
+    --font: Open Sans, sans-serif;
+}
+
+
+html,
+body,
+#root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-dark);
+    color: var(--text);
+    font-family: var(--font);
+}
+
+.block {
+    background: var(--bg);
+    border: var(--border);
+    border-radius: var(--border-radius);
+}
+
+button,
+a.button {
+    display: inline-block;
+    padding: 0.5em 1.33em;
+    background: var(--bg-light);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    color: var(--text);
+    transition: background 0.1s ease-in-out;
+    --hover: var(--bg-hover);
+    --disabled: var(--bg-disabled);
+
+
+    &.danger {
+        background: var(--danger);
+        border-color: var(--danger-border);
+        --hover: var(--danger-hover);
+    }
+
+
+    &:hover {
+        background: var(--hover);
+        cursor: pointer;
+        
+    }
+    
+    &:disabled {
+        background: var(--disabled);
+        color: var(--text-muted);
+        cursor: default;
+    }
+    
+}
+
+input,
+textarea {
+    padding: 0.66em 1.33em;
+    background: var(--bg-dark);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    color: var(--text);
+    outline: none;
+
+
+    &.danger {
+        border-color: var(--danger-border);
+    }
+
+}

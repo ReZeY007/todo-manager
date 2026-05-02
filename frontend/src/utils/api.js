@@ -123,3 +123,13 @@ export async function createTask(taskData) {
 
   return response;
 }
+
+export async function deleteTask(taskId) {
+  const response = await fetch(`${BASE_URL}/tasks/${taskId}`, {
+    method: "DELETE",
+    headers: AUTHORIZED_HEADERS(),
+    credentials: "include",
+  });
+
+  return response;
+}

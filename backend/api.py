@@ -115,7 +115,7 @@ def tasks():
         return jsonify({"msg": "Task created"}), 200
 
 
-@api.route("/tasks/<int:task_id>", methods=["GET", "PUT"])
+@api.route("/tasks/<int:task_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
 def task(task_id):
     if request.method == "GET":
@@ -152,3 +152,13 @@ def task(task_id):
         session.close()
 
         return jsonify({"msg": "Task updated"}), 200
+    elif request.method == "DELETE":
+        session = create_session()
+
+        task = session.query(Task).filter_by(id=task_id).first()
+        session.delete(task)
+
+        session.commit()
+        session.close()
+
+        return jsonify({"msg": "Task deleted"}), 200

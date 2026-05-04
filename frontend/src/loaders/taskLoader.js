@@ -6,6 +6,6 @@ export default async function taskLoader({ params }) {
   const responseData = await response.json();
 
   if (response.ok) {
-    return { taskData: await responseData.task };
+    return { taskData: responseData.task };
   }
 }

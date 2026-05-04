@@ -3,21 +3,28 @@ import { useLoaderData } from "react-router";
 import { updateTask, createTask } from "../utils/api";
 import "./Task.css";
 
-function Task({ isNew }) {
+function Task() {
   const loaderData = useLoaderData();
-  const [task, setTask] = useState(loaderData?.taskData);
+  const [editedTask, setEditedTask] = useState(loaderData?.taskData);
+  const [lastLoadedId, setLastLoadedId] = useState(loaderData?.taskData?.id);
+  const task = { ...loaderData?.taskData, ...editedTask };
+
+  if (loaderData?.taskData?.id !== lastLoadedId) {
+    setLastLoadedId(loaderData?.taskData?.id);
+    setEditedTask({});
+  }
 
   const handleChange = (event) => {
-    setTask({ ...task, [event.target.name]: event.target.value });
+    setEditedTask({ ...editedTask, [event.target.name]: event.target.value });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     let save = updateTask;
-    if (isNew) {
+    if (!task.id) {
       save = createTask;
     }
 
-    const response = save(task);
+    const response = await save(task);
 
     if (response.ok) {
       console.log("Task saved!");
@@ -32,7 +39,7 @@ function Task({ isNew }) {
         <input
           className="task__title"
           name="title"
-          value={task?.title}
+          value={editedTask?.title || ""}
           onChange={handleChange}
         />
 
@@ -46,7 +53,7 @@ function Task({ isNew }) {
       <textarea
         className="task__description"
         name="description"
-        value={task?.description}
+        value={editedTask?.description || ""}
         onChange={handleChange}
       />
     </div>

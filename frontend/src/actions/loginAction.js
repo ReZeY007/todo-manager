@@ -1,5 +1,4 @@
-import { login, getUser } from '../utils/api';
-
+import { login, getUser } from "../utils/api";
 
 export default async function loginAction({ request }) {
   const formData = await request.formData();
@@ -13,7 +12,7 @@ export default async function loginAction({ request }) {
     return { error: response.msg };
   }
 
-  const userResponse = await getUser()
-
-  return { user: userResponse.data }
+  const userResponse = await getUser();
+  const user = await userResponse.json();
+  return { user: user };
 }

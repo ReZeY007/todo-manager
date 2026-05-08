@@ -3,9 +3,11 @@ from db.src.db import create_session
 from flask import Blueprint, jsonify, make_response, request
 from flask_jwt_extended import (
     create_access_token,
+    create_refresh_token,
     get_jwt_identity,
     jwt_required,
     set_access_cookies,
+    set_refresh_cookies,
     unset_jwt_cookies,
 )
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -21,8 +23,11 @@ def login():
 
     if user and check_password_hash(user.password, data["password"]):
         access_token = create_access_token(identity=str(user.id))
+        refresh_token = create_refresh_token(identity=str(user.id))
+
         response = make_response(jsonify({"msg": "Login successful"}))
         set_access_cookies(response, access_token)
+        set_refresh_cookies(response, refresh_token)
 
         session.close()
         return response, 200
@@ -57,6 +62,19 @@ def register():
         session.close()
 
     return jsonify({"msg": "Successfully logged in"}), 201
+
+
+@api.route("/auth/refresh", methods=["POST"])
+@jwt_required(refresh=True)
+def refresh():
+    identity = get_jwt_identity()
+    access_token = create_access_token(identity=identity)
+    refresh_token = create_refresh_token(identity=identity)
+
+    response = jsonify({"msg": "token refreshed"})
+    set_access_cookies(response, access_token)
+    set_refresh_cookies(response, refresh_token)
+    return response
 
 
 @api.route("/logout", methods=["POST"])

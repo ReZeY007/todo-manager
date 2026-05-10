@@ -49,6 +49,19 @@ export async function login(userData) {
   }
 }
 
+export async function refresh() {
+  const response = await fetch(`${BASE_URL}/auth/refresh`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": Cookies.get("csrf_refresh_token"),
+    },
+    credentials: "include",
+  });
+
+  return response;
+}
+
 export async function getUser() {
   try {
     const response = await fetch(`${BASE_URL}/user`, {
@@ -58,10 +71,9 @@ export async function getUser() {
     });
 
     if (response.ok) {
-      const userData = await response.json();
-      return { status: response.status, data: userData };
+      return response;
     } else if (response.status == "401") {
-      return { status: response.status, error: "Unauthorized" };
+      return response;
     }
 
     return { status: response.status, error: "Unexpected error" };

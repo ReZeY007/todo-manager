@@ -11,6 +11,10 @@ app.config["JWT_COOKIE_CSRF_PROTECT"] = True
 app.config["JWT_ACCESS_CSRF_HEADER_NAME"] = "X-CSRF-TOKEN"
 app.config["JWT_COOKIE_SECURE"] = False
 app.config["JWT_COOKIE_SAMESITE"] = "Lax"
+app.config["JWT_REFRESH_COOKIE_PATH"] = "api/auth/refresh"
+app.config["JWT_SESSION_COOKIE"] = False
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = 3600
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = 86400
 
 app.register_blueprint(api)
 

@@ -5,26 +5,17 @@ import Home from "./pages/Home.jsx";
 import Task from "./pages/Task.jsx";
 import Default from "./layouts/Default.jsx";
 import { auth } from "./routes/auth.jsx";
-import { getUser } from "./utils/api.js";
 import { UserProvider } from "./contexts/UserContext.jsx";
 import homeLoader from "./loaders/homeLoader";
 import taskLoader from "./loaders/taskLoader";
+import userLoader from "./loaders/userLoader";
 import "./index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <UserProvider />,
-    loader: async () => {
-      const response = await getUser();
-
-      if (response.status === 200) {
-        const data = response.data;
-        return { user: data };
-      }
-
-      return null;
-    },
+    loader: userLoader,
     children: [
       {
         element: <Default />,

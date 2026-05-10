@@ -19,7 +19,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h1 className="navbar__header">Task Manager</h1>
+      <h1 className="navbar__header">TODO Manager</h1>
       <ul className="navbar__links">
         <li>
           <NavLink to="/" className="nav-link">

@@ -25,7 +25,7 @@ def login():
         access_token = create_access_token(identity=str(user.id))
         refresh_token = create_refresh_token(identity=str(user.id))
 
-        response = make_response(jsonify({"msg": "Login successful"}))
+        response = make_response(jsonify({"msg": "Successful login"}))
         set_access_cookies(response, access_token)
         set_refresh_cookies(response, refresh_token)
 
@@ -55,13 +55,25 @@ def register():
     try:
         session.add(new_user)
         session.commit()
+
+        new_user_dict = {"username": new_user.username, "email": new_user.email}
+
+        access_token = create_access_token(identity=str(new_user.id))
+        refresh_token = create_refresh_token(identity=str(new_user.id))
+
+        response = make_response(
+            jsonify({"msg": "Successful registration", "user": new_user_dict})
+        )
+        set_access_cookies(response, access_token)
+        set_refresh_cookies(response, refresh_token)
+
+        return response, 201
+
     except Exception:
         session.rollback()
         return jsonify({"msg": "User with this email already exists"}), 409
     finally:
         session.close()
-
-    return jsonify({"msg": "Successfully logged in"}), 201
 
 
 @api.route("/auth/refresh", methods=["POST"])
@@ -77,7 +89,7 @@ def refresh():
     return response
 
 
-@api.route("/logout", methods=["POST"])
+@api.route("/auth/logout", methods=["POST"])
 @jwt_required()
 def logout():
     response = jsonify({"msg": "Successful logout"})

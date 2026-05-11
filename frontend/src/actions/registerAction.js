@@ -1,7 +1,7 @@
-import { register, login, getUser } from '../utils/api';
+import { redirect } from "react-router";
+import { register } from "../utils/api/auth";
 
-
-export default async function registerAction({request}) {
+export default async function registerAction({ request }) {
   const formData = await request.formData();
   const userData = {
     username: formData.get("username"),
@@ -9,23 +9,11 @@ export default async function registerAction({request}) {
     password: formData.get("password"),
     confirmPassword: formData.get("confirmPassword"),
   };
-  const registerResponse = await register(userData);
+  const response = await register(userData);
 
-  if (!registerResponse.success) {
-    return { error: registerResponse.msg };
+  if (response?.error) {
+    return response.error;
   }
 
-  const loginResponse = await login(userData);
-
-  if (!loginResponse.success) {
-    return { error: loginResponse.msg };
-  }
-
-  const userResponse = await getUser();
-
-  if (userResponse.status == 200) {
-    return {user: userResponse.data}
-  }
-
-  return { error: userResponse.error }
+  return redirect("/");
 }

@@ -1,4 +1,5 @@
-import { login, getUser } from "../utils/api";
+import { redirect } from "react-router";
+import { login } from "../utils/api/auth";
 
 export default async function loginAction({ request }) {
   const formData = await request.formData();
@@ -8,11 +9,9 @@ export default async function loginAction({ request }) {
   };
   const response = await login(userData);
 
-  if (!response.success) {
-    return { error: response.msg };
+  if (response?.error) {
+    return response.error;
   }
 
-  const userResponse = await getUser();
-  const user = await userResponse.json();
-  return { user: user };
+  return redirect("/");
 }

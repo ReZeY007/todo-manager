@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { deleteTask } from "../../utils/api";
+import { deleteTask } from "../../utils/api/tasks";
 import "./TaskTile.css";
 import { useState } from "react";
 
@@ -8,9 +8,11 @@ function TaskTile({ task }) {
 
   const handleDeleteButton = async (e) => {
     e.preventDefault();
-    const response = await deleteTask(task.id);
+    const data = await deleteTask(task.id);
 
-    if (response.ok) {
+    if (data?.error) {
+      console.log(data.error);
+    } else {
       setIsDeleted(true);
     }
   };

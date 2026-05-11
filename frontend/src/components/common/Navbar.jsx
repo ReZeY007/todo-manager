@@ -1,20 +1,22 @@
 import { useContext } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
-import { logout } from "../../utils/api";
+import { logout } from "../../utils/api/auth";
 import "./Navbar.css";
 
 function Navbar() {
+  const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
 
   const handleLogout = async () => {
-    const response = await logout();
+    const data = await logout();
 
-    if (!response.ok) {
+    if (data?.error) {
+      console.log(data.error);
       window.location.reload();
     }
-
     setUser(null);
+    navigate("/auth/login", { replace: true });
   };
 
   return (

@@ -1,13 +1,13 @@
 import { useState, useContext, useEffect } from "react";
 import { Form, useActionData, useNavigate } from "react-router";
-import { UserContext } from '../contexts/UserContext.jsx';
+import { UserContext } from "../contexts/UserContext.jsx";
 import "./Register.css";
 
 function Register() {
   const navigate = useNavigate();
   const actionData = useActionData();
   const { setUser } = useContext(UserContext);
-  
+
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
   const handlePasswordChange = () => {
@@ -18,13 +18,7 @@ function Register() {
     setIsPasswordMatch(password === confirmPassword);
   };
 
-  useEffect(() => {
-    if (actionData?.user) {
-      setUser(actionData.user);
-      navigate('/');
-    }
-  }, [actionData])
-
+  useEffect(() => {}, [actionData, navigate, setUser]);
 
   return (
     <div className="register-panel block">
@@ -35,19 +29,23 @@ function Register() {
         <input type="email" name="email" placeholder="Email" />
         <input
           type="password"
-          className={!isPasswordMatch ? "danger" : ''}
+          className={!isPasswordMatch ? "danger" : ""}
           name="password"
           placeholder="Password"
           onChange={handlePasswordChange}
         />
         <input
           type="password"
-          className={!isPasswordMatch ? "danger" : ''}
+          className={!isPasswordMatch ? "danger" : ""}
           name="confirmPassword"
           placeholder="Confirm Password"
           onChange={handlePasswordChange}
         />
-        <button type="submit" className="register-button" disabled={!isPasswordMatch}>
+        <button
+          type="submit"
+          className="register-button"
+          disabled={!isPasswordMatch}
+        >
           Register
         </button>
       </Form>

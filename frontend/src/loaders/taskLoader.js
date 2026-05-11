@@ -1,11 +1,8 @@
-import { getTask } from "../utils/api";
+import { getTask } from "../utils/api/tasks";
 
 export default async function taskLoader({ params }) {
   const taskId = params.taskId;
-  const response = await getTask(taskId);
-  const responseData = await response.json();
+  const data = await getTask(taskId);
 
-  if (response.ok) {
-    return { taskData: responseData.task };
-  }
+  return { taskData: data.task };
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router";
-import { updateTask, createTask } from "../utils/api";
+import { updateTask, createTask } from "../utils/api/tasks";
 import "./Task.css";
 
 function Task() {
@@ -24,12 +24,10 @@ function Task() {
       save = createTask;
     }
 
-    const response = await save(task);
+    const data = await save(task);
 
-    if (response.ok) {
-      console.log("Task saved!");
-    } else {
-      console.error("An error occured while saving task.");
+    if (data?.error) {
+      console.log(data.error);
     }
   };
 

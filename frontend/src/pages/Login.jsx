@@ -8,12 +8,7 @@ function Login() {
   const actionData = useActionData();
   const { setUser } = useContext(UserContext);
 
-  useEffect(() => {
-    if (actionData?.user) {
-      setUser(actionData.user);
-      navigate("/");
-    }
-  }, [actionData, navigate, setUser]);
+  useEffect(() => {}, [actionData, navigate, setUser]);
 
   return (
     <div className="login-panel block">

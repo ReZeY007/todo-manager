@@ -6,7 +6,7 @@ import "./Register.css";
 function Register() {
   const navigate = useNavigate();
   const actionData = useActionData();
-  const { setUser } = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
 
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
@@ -18,7 +18,12 @@ function Register() {
     setIsPasswordMatch(password === confirmPassword);
   };
 
-  useEffect(() => {}, [actionData, navigate, setUser]);
+  useEffect(() => {
+    if (actionData) {
+      updateUser();
+      navigate("/");
+    }
+  }, [actionData, navigate, updateUser]);
 
   return (
     <div className="register-panel block">

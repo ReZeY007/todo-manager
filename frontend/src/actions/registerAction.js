@@ -1,4 +1,3 @@
-import { redirect } from "react-router";
 import { register } from "../utils/api/auth";
 
 export default async function registerAction({ request }) {
@@ -15,5 +14,5 @@ export default async function registerAction({ request }) {
     return response.error;
   }
 
-  return redirect("/");
+  return response;
 }

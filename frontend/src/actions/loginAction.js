@@ -1,4 +1,3 @@
-import { redirect } from "react-router";
 import { login } from "../utils/api/auth";
 
 export default async function loginAction({ request }) {
@@ -13,5 +12,5 @@ export default async function loginAction({ request }) {
     return response.error;
   }
 
-  return redirect("/");
+  return response;
 }

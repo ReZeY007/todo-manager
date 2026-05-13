@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
 
   const handleLogout = async () => {
     const data = await logout();
@@ -15,7 +15,7 @@ function Navbar() {
       console.log(data.error);
       window.location.reload();
     }
-    setUser(null);
+    updateUser();
     navigate("/auth/login", { replace: true });
   };
 

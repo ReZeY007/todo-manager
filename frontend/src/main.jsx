@@ -5,18 +5,16 @@ import Home from "./pages/Home";
 import Task from "./pages/Task";
 import Default from "./layouts/Default";
 import { auth } from "./routes/auth";
-import Root from "./components/Root";
 import homeLoader from "./loaders/homeLoader";
 import taskLoader from "./loaders/taskLoader";
-import userLoader from "./loaders/userLoader";
+import UserProvider from "./contexts/UserContext.jsx";
 import "./utils/api/global.js";
 import "./index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
-    loader: userLoader,
+    element: <UserProvider />,
     children: [
       {
         element: <Default />,

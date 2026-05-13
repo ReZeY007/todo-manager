@@ -6,9 +6,14 @@ import "./Login.css";
 function Login() {
   const navigate = useNavigate();
   const actionData = useActionData();
-  const { setUser } = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
 
-  useEffect(() => {}, [actionData, navigate, setUser]);
+  useEffect(() => {
+    if (actionData) {
+      updateUser();
+      navigate("/");
+    }
+  }, [actionData, navigate, updateUser]);
 
   return (
     <div className="login-panel block">

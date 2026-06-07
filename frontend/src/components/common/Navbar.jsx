@@ -23,11 +23,6 @@ function Navbar() {
     <nav className="navbar">
       <h1 className="navbar__header">TODO Manager</h1>
       <ul className="navbar__links">
-        <li>
-          <NavLink to="/" className="nav-link">
-            Home
-          </NavLink>
-        </li>
         {!user ? (
           <>
             <li>
@@ -43,6 +38,11 @@ function Navbar() {
           </>
         ) : (
           <>
+            <li>
+              <NavLink to="/" className="nav-link">
+                Home
+              </NavLink>
+            </li>
             <li>
               <NavLink to="/tasks" className={"nav-link"}>
                 New

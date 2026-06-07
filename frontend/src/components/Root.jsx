@@ -3,7 +3,6 @@ import UserProvider from "../contexts/UserContext";
 
 function Root() {
   const loaderData = useLoaderData();
-  console.log("rerendering root");
   return (
     <UserProvider initialUser={loaderData?.user}>
       <Outlet />

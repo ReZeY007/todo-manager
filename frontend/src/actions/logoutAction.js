@@ -1,9 +1,7 @@
 import { redirect } from "react-router";
 import { logout } from "../utils/api/auth";
 
-export default async function logoutAction({ request }) {
-  const formData = await request.formData();
-
+export default async function logoutAction() {
   try {
     await logout();
     return redirect("/auth/login");

@@ -20,17 +20,11 @@ export async function updateTask({ id, title, description }) {
 }
 
 export async function createTask({ title, description }) {
-  try {
-    const response = await authorizedClient.post("/tasks", {
-      title,
-      description,
-    });
-
-    return response.data;
-  } catch (error) {
-    console.error(error.message);
-    return { error: error };
-  }
+  const response = await authorizedClient.post("/tasks", {
+    title,
+    description,
+  });
+  return response.data;
 }
 
 export async function deleteTask(taskId) {

@@ -1,6 +1,12 @@
 .task {
     display: flex;
     flex-direction: column;
+    flex: 1 1;
+}
+
+.task-form {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
     padding: 16px;
     flex: 1 1;

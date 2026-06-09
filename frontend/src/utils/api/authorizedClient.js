@@ -1,6 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { refresh } from "./auth";
+import { redirect } from "react-router";
 
 const authorizedClient = axios.create({
   baseURL: "http://localhost:5000/api",
@@ -33,11 +34,8 @@ authorizedClient.interceptors.response.use(
         await refresh();
         const repeatedResponseData = authorizedClient(originalResponse);
         return repeatedResponseData;
-      } catch (error) {
-        if (window.location.pathname !== "/auth/login") {
-          window.location.href = "/auth/login";
-          return Promise.reject(error);
-        }
+      } catch {
+        throw redirect("/auth/login");
       }
     }
   },

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router";
-import { updateTask, createTask } from "../utils/api/tasks";
+import { useLoaderData, Form } from "react-router";
 import "./Task.css";
 
 function Task() {
@@ -11,49 +10,50 @@ function Task() {
 
   if (loaderData?.taskData?.id !== lastLoadedId) {
     setLastLoadedId(loaderData?.taskData?.id);
-    setEditedTask({});
+    setEditedTask(loaderData?.taskData);
   }
 
   const handleChange = (event) => {
     setEditedTask({ ...editedTask, [event.target.name]: event.target.value });
   };
 
-  const handleSave = async () => {
-    let save = updateTask;
-    if (!task.id) {
-      save = createTask;
-    }
-
-    const data = await save(task);
-
-    if (data?.error) {
-      console.log(data.error);
-    }
-  };
-
   return (
     <div className="task block">
-      <div className="task__top">
-        <input
-          className="task__title"
-          name="title"
-          value={editedTask?.title || ""}
+      <Form
+        id="deleteTaskForm"
+        action={"/tasks/" + task.id}
+        method="DELETE"
+        style={{ display: "none" }}
+      />
+      <Form
+        action={"/tasks/" + task?.id ? task.id : ""}
+        method="PUT"
+        className="task-form"
+      >
+        <div className="task__top">
+          <input
+            className="task__title"
+            name="title"
+            value={editedTask?.title || ""}
+            onChange={handleChange}
+          />
+
+          <div className="task__actions">
+            <button className="" type="submit">
+              Save
+            </button>
+            <button className="danger" form="deleteTaskForm" type="submit">
+              Delete
+            </button>
+          </div>
+        </div>
+        <textarea
+          className="task__description"
+          name="description"
+          value={editedTask?.description || ""}
           onChange={handleChange}
         />
-
-        <div className="task__actions">
-          <button className="" onClick={handleSave}>
-            Save
-          </button>
-          <button className="danger">Delete</button>
-        </div>
-      </div>
-      <textarea
-        className="task__description"
-        name="description"
-        value={editedTask?.description || ""}
-        onChange={handleChange}
-      />
+      </Form>
     </div>
   );
 }

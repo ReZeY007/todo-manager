@@ -140,9 +140,10 @@ def tasks():
 
         session.add(task)
         session.commit()
+        newTaskId = task.id
         session.close()
 
-        return jsonify({"msg": "Task created"}), 200
+        return jsonify({"msg": "Task created", "id": newTaskId}), 200
 
 
 @api.route("/tasks/<int:task_id>", methods=["GET", "PUT", "DELETE"])

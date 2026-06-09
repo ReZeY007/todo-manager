@@ -1,25 +1,19 @@
-import { NavLink } from "react-router";
-import { deleteTask } from "../../utils/api/tasks";
+import { NavLink, useSubmit } from "react-router";
 import "./TaskTile.css";
-import { useState } from "react";
 
 function TaskTile({ task }) {
-  const [isDeleted, setIsDeleted] = useState(false);
+  let submitDeletion = useSubmit();
 
   const handleDeleteButton = async (e) => {
     e.preventDefault();
-    const data = await deleteTask(task.id);
-
-    if (data?.error) {
-      console.log(data.error);
-    } else {
-      setIsDeleted(true);
-    }
+    submitDeletion(
+      {},
+      {
+        action: `tasks/${task.id}`,
+        method: "DELETE",
+      },
+    );
   };
-
-  if (isDeleted) {
-    return null;
-  }
 
   return (
     <NavLink to={`/tasks/${task.id}`} className="task-tile">

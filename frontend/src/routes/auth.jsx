@@ -1,8 +1,9 @@
 import Auth from "../layouts/Auth";
 import Login from "../pages/Login";
-import Register from "../pages/Register"
+import Register from "../pages/Register";
 import loginAction from "../actions/loginAction";
 import registerAction from "../actions/registerAction";
+import logoutAction from "../actions/logoutAction";
 
 export const auth = {
   element: <Auth />,
@@ -16,6 +17,10 @@ export const auth = {
       path: "auth/register",
       element: <Register />,
       action: registerAction,
+    },
+    {
+      path: "auth/logout",
+      action: logoutAction,
     },
   ],
 };

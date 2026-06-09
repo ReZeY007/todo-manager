@@ -9,6 +9,8 @@ import Root from "./components/Root";
 import homeLoader from "./loaders/homeLoader";
 import taskLoader from "./loaders/taskLoader";
 import userLoader from "./loaders/userLoader";
+import taskAction from "./actions/taskAction.js";
+import createTaskAction from "./actions/createTaskAction.js";
 import "./utils/api/global.js";
 import "./index.css";
 
@@ -29,11 +31,13 @@ const router = createBrowserRouter([
           {
             path: "tasks",
             element: <Task />,
+            action: createTaskAction,
           },
           {
             path: "tasks/:taskId",
             element: <Task />,
             loader: taskLoader,
+            action: taskAction,
           },
           auth,
         ],

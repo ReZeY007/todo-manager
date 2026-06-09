@@ -1,14 +1,13 @@
-import { useContext, useEffect } from "react";
-import { Form, useNavigate, useActionData } from "react-router";
-import { UserContext } from "../contexts/UserContext.jsx";
+import { useContext } from "react";
+import { Form } from "react-router";
+import { UserContext } from "../contexts/UserContext";
 import "./Login.css";
 
 function Login() {
-  const navigate = useNavigate();
-  const actionData = useActionData();
-  const { setUser } = useContext(UserContext);
-
-  useEffect(() => {}, [actionData, navigate, setUser]);
+  const { user, setUser } = useContext(UserContext);
+  if (user) {
+    setUser(null);
+  }
 
   return (
     <div className="login-panel block">

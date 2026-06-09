@@ -1,22 +1,29 @@
 import { useContext } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useNavigate, useSubmit } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
 import { logout } from "../../utils/api/auth";
 import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const submit = useSubmit();
   const { user, setUser } = useContext(UserContext);
 
   const handleLogout = async () => {
-    const data = await logout();
-
-    if (data?.error) {
-      console.log(data.error);
-      window.location.reload();
-    }
-    setUser(null);
-    navigate("/auth/login", { replace: true });
+    submit(
+      {},
+      {
+        action: "/auth/logout",
+        method: "POST",
+      },
+    );
+    // const data = await logout();
+    // if (data?.error) {
+    //   console.log(data.error);
+    //   window.location.reload();
+    // }
+    // setUser(null);
+    // navigate("/auth/login", { replace: true });
   };
 
   return (

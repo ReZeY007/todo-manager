@@ -2,12 +2,16 @@ import { useContext } from "react";
 import { Form } from "react-router";
 import { UserContext } from "../contexts/UserContext";
 import "./Login.css";
+import { useEffect } from "react";
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
-  if (user) {
-    setUser(null);
-  }
+
+  useEffect(() => {
+    if (user) {
+      setUser(null);
+    }
+  });
 
   return (
     <div className="login-panel block">

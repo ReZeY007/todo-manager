@@ -12,8 +12,21 @@
     margin-bottom: 24px;
 }
 
+.register-head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px 0;
+}
+
 .register-title {
-    margin: 24px 0;
+    margin: 0;
+}
+
+.register-error-message {
+    margin: 0;
+    color: var(--danger);
+    font-size: 15px;
 }
 
 .register-button {

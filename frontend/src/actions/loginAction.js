@@ -7,11 +7,11 @@ export default async function loginAction({ request }) {
     email: formData.get("email"),
     password: formData.get("password"),
   };
-  const response = await login(userData);
 
-  if (response?.error) {
-    return response.error;
+  try {
+    await login(userData);
+    return redirect("/");
+  } catch (error) {
+    return { status: error.response.status };
   }
-
-  return redirect("/");
 }

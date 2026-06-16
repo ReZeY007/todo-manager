@@ -9,11 +9,11 @@ export default async function registerAction({ request }) {
     password: formData.get("password"),
     confirmPassword: formData.get("confirmPassword"),
   };
-  const response = await register(userData);
 
-  if (response?.error) {
-    return response.error;
+  try {
+    await register(userData);
+    return redirect("/");
+  } catch (error) {
+    return { status: error.response.status };
   }
-
-  return redirect("/");
 }

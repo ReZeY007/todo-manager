@@ -13,8 +13,8 @@ function Home() {
         <Await
           resolve={data.tasks}
           errorElement={
-            <b style={{ fontSize: 18, textAlign: "center", color: "red" }}>
-              Error
+            <b style={{ color: "var(--danger)", textAlign: "center" }}>
+              An error occured when fetching tasks...
             </b>
           }
         >

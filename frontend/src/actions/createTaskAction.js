@@ -12,7 +12,6 @@ export default async function createTaskAction({ request }) {
     const data = await createTask(taskData);
     return redirect(`/tasks/${data.id}`);
   } catch (error) {
-    console.error(error);
-    return null;
+    return error;
   }
 }

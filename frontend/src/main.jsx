@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import Home from "./pages/Home";
 import Task from "./pages/Task";
+import NewTask from "./pages/NewTask";
 import Default from "./layouts/Default";
 import { auth } from "./routes/auth";
 import Root from "./components/Root";
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
           },
           {
             path: "tasks",
-            element: <Task />,
+            element: <NewTask />,
             action: createTaskAction,
           },
           {

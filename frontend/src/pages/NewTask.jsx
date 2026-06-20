@@ -6,7 +6,6 @@ function Task() {
   const loaderData = useLoaderData();
   const [editedTask, setEditedTask] = useState(loaderData?.taskData);
   const [lastLoadedId, setLastLoadedId] = useState(loaderData?.taskData?.id);
-  const task = { ...loaderData?.taskData, ...editedTask };
 
   if (loaderData?.taskData?.id !== lastLoadedId) {
     setLastLoadedId(loaderData?.taskData?.id);
@@ -19,13 +18,7 @@ function Task() {
 
   return (
     <div className="task block">
-      <Form
-        id="deleteTaskForm"
-        action={"/tasks/" + task.id}
-        method="DELETE"
-        style={{ display: "none" }}
-      />
-      <Form action={"/tasks/" + task.id} method="PUT" className="task-form">
+      <Form action="/tasks/" method="PUT" className="task-form">
         <div className="task__top">
           <input
             className="task__title"
@@ -37,10 +30,7 @@ function Task() {
 
           <div className="task__actions">
             <button className="" type="submit">
-              Save
-            </button>
-            <button className="danger" form="deleteTaskForm" type="submit">
-              Delete
+              Create
             </button>
           </div>
         </div>

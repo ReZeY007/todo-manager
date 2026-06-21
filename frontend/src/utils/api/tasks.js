@@ -31,3 +31,8 @@ export async function deleteTask(taskId) {
   const response = await authorizedClient.delete(`/tasks/${taskId}`);
   return response.data;
 }
+
+export async function patchTask(taskId, values) {
+  const response = await authorizedClient.patch(`/tasks/${taskId}`, values);
+  return response.data;
+}

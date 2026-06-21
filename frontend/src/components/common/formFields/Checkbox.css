@@ -1,0 +1,94 @@
+.cb-root {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+}
+
+.cb-root:focus-visible {
+    outline: 2px solid #7c6aff;
+    outline-offset: 4px;
+    border-radius: 6px;
+}
+
+/* ── Визуальный квадрат ── */
+.cb-box {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid #3a3a4a;
+    background: #1a1a22;
+    flex-shrink: 0;
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+    overflow: hidden;
+}
+
+.cb-root:hover .cb-box {
+    border-color: #7c6aff;
+    box-shadow: 0 0 0 4px rgba(124, 106, 255, 0.12);
+}
+
+.cb-root[data-checked="true"] .cb-box {
+    background: #7c6aff;
+    border-color: #7c6aff;
+    box-shadow: 0 0 0 4px rgba(124, 106, 255, 0.18);
+}
+
+/* ── Галочка ── */
+.cb-tick {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+    transition:
+        transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.15s ease;
+}
+
+.cb-root[data-checked="true"] .cb-tick {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+}
+
+.cb-tick svg {
+    display: block;
+}
+
+/* ── Ripple ── */
+.cb-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(0);
+    animation: ripple 0.5s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ── Лейбл ── */
+.cb-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #c4c4d0;
+    line-height: 1;
+    transition: color 0.15s ease;
+}
+
+.cb-root[data-checked="true"] .cb-label {
+    color: #e8e8ec;
+}

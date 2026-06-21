@@ -9,6 +9,11 @@
     padding: 8px 12px;
 }
 
+.task-tile__left {
+    display: flex;
+    gap: 12px;
+}
+
 .task-tile__title {
     margin: 0;
 }
@@ -25,7 +30,6 @@
     display: flex;
     align-items: center;
     margin-right: 8px;
-    
 
     & button {
         font-size: 14px;

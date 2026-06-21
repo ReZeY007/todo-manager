@@ -106,7 +106,10 @@ def get_user():
     user = session.query(User).filter_by(id=get_jwt_identity()).first()
     session.close()
 
-    return jsonify({"username": user.username, "email": user.email}), 200
+    if user:
+        return jsonify({"username": user.username, "email": user.email}), 200
+    else:
+        return jsonify({"msg": "User not found"}), 404
 
 
 @api.route("/tasks", methods=["GET", "POST"])
@@ -123,6 +126,7 @@ def tasks():
                     "id": task.id,
                     "title": task.title,
                     "description": task.description,
+                    "isCompleted": task.is_completed,
                 },
                 tasks,
             )
@@ -137,6 +141,7 @@ def tasks():
         task.title = task_data["title"]
         task.description = task_data["description"]
         task.user_id = get_jwt_identity()
+        task.is_completed = False
 
         session.add(task)
         session.commit()
@@ -146,7 +151,7 @@ def tasks():
         return jsonify({"msg": "Task created", "id": newTaskId}), 200
 
 
-@api.route("/tasks/<int:task_id>", methods=["GET", "PUT", "DELETE"])
+@api.route("/tasks/<int:task_id>", methods=["GET", "PUT", "PATCH", "DELETE"])
 @jwt_required()
 def task(task_id):
     if request.method == "GET":
@@ -163,6 +168,7 @@ def task(task_id):
                     "id": task.id,
                     "title": task.title,
                     "description": task.description,
+                    "isCompleted": task.is_completed,
                 }
             }
         )
@@ -183,6 +189,27 @@ def task(task_id):
         session.close()
 
         return jsonify({"msg": "Task updated"}), 200
+    elif request.method == "PATCH":
+        session = create_session()
+        task = session.query(Task).filter_by(id=task_id).first()
+
+        request_data = request.get_json()
+        if "isCompleted" in request_data.keys():
+            task.is_completed = request_data["isCompleted"]
+
+        patched_task = {
+            "id": task.id,
+            "title": task.title,
+            "description": task.description,
+            "isCompleted": task.is_completed,
+        }
+
+        session.commit()
+
+        session.close()
+
+        return jsonify(patched_task), 200
+
     elif request.method == "DELETE":
         session = create_session()
 

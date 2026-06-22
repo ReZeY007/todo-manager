@@ -6,11 +6,13 @@
     --bg-disabled: hsl(0, 0%, 18%);
     --bg: hsl(0, 0%, 15%);
     --bg-dark: hsl(0, 0%, 10%);
+    --accent: hsl(247, 100%, 71%);
     --danger-hover: hsl(0, 65%, 35%);
     --danger: hsl(0, 65%, 42%);
     --danger-border: hsl(0, 60%, 45%);
     --border-color: hsl(0, 0%, 22%);
-    --border: solid 1px var(--border-color);
+    --border: solid 2px var(--border-color);
+    --border-accent: solid 2px var(--accent);
     --border-radius: 0.75em;
     --text: hsl(0, 0%, 90%);
     --text-muted: hsl(0, 0%, 80%);
@@ -33,6 +35,14 @@ body,
     background: var(--bg);
     border: var(--border);
     border-radius: var(--border-radius);
+
+    &.hv:hover {
+        background: var(--bg-hover);
+        border: var(--border-accent);
+        transition:
+            background 0.2s ease-in-out,
+            border 0.2s ease-in-out;
+    }
 }
 
 button,
@@ -47,6 +57,14 @@ a.button {
     transition: background 0.1s ease-in-out;
     --hover: var(--bg-hover);
     --disabled: var(--bg-disabled);
+
+    &:has(svg) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5em;
+        text-align: center;
+    }
 
     &.danger {
         background: var(--danger);
@@ -79,4 +97,8 @@ textarea {
     &.danger {
         border-color: var(--danger-border);
     }
+}
+
+svg {
+    fill: var(--text);
 }

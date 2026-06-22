@@ -35,3 +35,23 @@
         font-size: 14px;
     }
 }
+
+.task-tile--completed > .block {
+    background: var(--bg-dark);
+    border: var(--border-accent);
+    border-width: 2px;
+}
+
+.task-tile--completed .task-tile__info {
+    font-style: italic;
+}
+
+.task-tile--completed .task-tile__description,
+.task-tile--completed .task-tile__title {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+
+.task-tile--completed .task-tile__description {
+    text-decoration-color: var(--text-muted);
+}

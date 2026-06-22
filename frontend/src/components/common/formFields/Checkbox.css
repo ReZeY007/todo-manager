@@ -8,7 +8,7 @@
 }
 
 .cb-root:focus-visible {
-    outline: 2px solid #7c6aff;
+    outline: 2px solid var(--accent);
     outline-offset: 4px;
     border-radius: 6px;
 }
@@ -30,13 +30,13 @@
 }
 
 .cb-root:hover .cb-box {
-    border-color: #7c6aff;
+    border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(124, 106, 255, 0.12);
 }
 
 .cb-root[data-checked="true"] .cb-box {
-    background: #7c6aff;
-    border-color: #7c6aff;
+    background: var(--accent);
+    border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(124, 106, 255, 0.18);
 }
 

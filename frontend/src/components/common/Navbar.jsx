@@ -19,7 +19,9 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h1 className="navbar__header">TODO Manager</h1>
+      <h1 className="navbar__header">
+        TO<span style={{ color: "var(--accent)" }}>DO</span> Manager
+      </h1>
       <ul className="navbar__links">
         {!user ? (
           <>

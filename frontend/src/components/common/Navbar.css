@@ -9,7 +9,6 @@
     align-items: center;
     gap: 12px;
     list-style: none;
-
 }
 
 .nav-link {
@@ -19,10 +18,13 @@
     border-radius: var(--border-radius);
     text-decoration: none;
     color: var(--text);
-    transition: background 0.1s ease-in-out;
+    transition:
+        background 0.2s ease-in-out,
+        border 0.2s ease-in-out;
 
     &:hover {
         background: var(--bg-light);
+        border: var(--border-accent);
         cursor: pointer;
     }
 }

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useLoaderData, Await } from "react-router";
-import TaskTile from "../components/tasks/TaskTile";
+import TasksList from "../components/tasks/TasksList";
 import LoadingMessage from "../components/common/LoadingMessage";
 import "./Home.css";
 
@@ -11,15 +11,15 @@ function Home() {
     <ul className="tasks-list">
       <Suspense fallback={<LoadingMessage />}>
         <Await
-          resolve={data.tasks}
+          resolve={data.lists}
           errorElement={
             <b style={{ color: "var(--danger)", textAlign: "center" }}>
               An error occured when fetching tasks...
             </b>
           }
         >
-          {(tasks) =>
-            tasks.map((task, index) => <TaskTile key={index} task={task} />)
+          {(lists) =>
+            lists.map((list, index) => <TasksList list={list} key={index} />)
           }
         </Await>
       </Suspense>

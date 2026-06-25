@@ -1,13 +1,12 @@
-import { getTasks } from "../utils/api/tasks";
+import { getLists } from "../utils/api/lists";
 
 export default function homeLoader() {
-  const tasks = getTasks()
-    .then((data) => {
-      return data.tasks;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  const lists = getLists().then((data) => {
+    return data.lists;
+  });
+  // .catch((error) => {
+  //   console.error(error);
+  // });
 
-  return { tasks };
+  return { lists };
 }

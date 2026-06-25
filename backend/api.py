@@ -1,4 +1,4 @@
-from db.src.classes import Task, User
+from db.src.classes import List, Task, User
 from db.src.db import create_session
 from flask import Blueprint, jsonify, make_response, request
 from flask_jwt_extended import (
@@ -127,6 +127,7 @@ def tasks():
                     "title": task.title,
                     "description": task.description,
                     "isCompleted": task.is_completed,
+                    "listId": task.list_id,
                 },
                 tasks,
             )
@@ -169,6 +170,7 @@ def task(task_id):
                     "title": task.title,
                     "description": task.description,
                     "isCompleted": task.is_completed,
+                    "listId": task.list_id,
                 }
             }
         )
@@ -202,10 +204,10 @@ def task(task_id):
             "title": task.title,
             "description": task.description,
             "isCompleted": task.is_completed,
+            "listId": task.list_id,
         }
 
         session.commit()
-
         session.close()
 
         return jsonify(patched_task), 200
@@ -220,3 +222,74 @@ def task(task_id):
         session.close()
 
         return jsonify({"msg": "Task deleted"}), 200
+
+
+@api.route("/lists", methods=["GET", "POST"])
+@jwt_required()
+def lists():
+    if request.method == "GET":
+        session = create_session()
+
+        lists = session.query(List).filter_by(user_id=get_jwt_identity()).all()
+
+        lists_json = list(
+            map(
+                lambda tasksList: {
+                    "id": tasksList.id,
+                    "title": tasksList.title,
+                    "tasks": list(
+                        map(
+                            lambda task: {
+                                "id": task.id,
+                                "title": task.title,
+                                "description": task.description,
+                                "isCompleted": task.is_completed,
+                                "listId": task.list_id,
+                            },
+                            tasksList.tasks,
+                        )
+                    ),
+                },
+                lists,
+            )
+        )
+        session.close()
+
+        return jsonify({"lists": lists_json}), 200
+    return
+
+
+@api.route("/lists/<int:list_id>", methods=["GET", "POST"])
+@jwt_required()
+def get_list(list_id):
+    if request.method == "GET":
+        session = create_session()
+
+        list = (
+            session.query(List)
+            .filter_by(id=list_id, user_id=get_jwt_identity())
+            .first()
+        )
+
+        session.close()
+
+        list_json = {
+            "id": list.id,
+            "title": list.title,
+            "tasks": list(
+                map(
+                    lambda task: {
+                        "id": task.id,
+                        "title": task.title,
+                        "description": task.description,
+                        "isCompleted": task.is_completed,
+                        "listId": task.list_id,
+                    },
+                    list.tasks,
+                )
+            ),
+        }
+
+        return jsonify({"list": list_json}), 200
+
+    return

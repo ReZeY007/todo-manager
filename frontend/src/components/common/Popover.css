@@ -1,0 +1,24 @@
+.popover {
+    position: relative;
+    display: inline-block;
+}
+
+.popover__content {
+    position: absolute;
+    top: 115%;
+    left: 50%;
+    transform: translate(-50%, -6px);
+    z-index: 100;
+    padding: 4px 12px;
+    opacity: 0;
+    transition:
+        opacity 0.1s ease-in,
+        transform 0.1s ease-in;
+    pointer-events: none;
+
+    &.open {
+        opacity: 1;
+        transform: translate(-50%, 0);
+        pointer-events: auto;
+    }
+}

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink, useSubmit } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
+import Popover from "./Popover";
 import "./Navbar.css";
 
 function Navbar() {
@@ -44,9 +45,16 @@ function Navbar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/tasks" className={"nav-link"}>
-                New
-              </NavLink>
+              <Popover className={"nav-link"} button="New">
+                <ul className="new-options">
+                  <li>
+                    <NavLink to="/tasks">New Task</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/lists">New List</NavLink>
+                  </li>
+                </ul>
+              </Popover>
             </li>
             <li>
               <a className="nav-link" onClick={handleLogout}>

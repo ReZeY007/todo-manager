@@ -48,6 +48,7 @@ body,
 button,
 a.button {
     display: inline-block;
+    box-sizing: border-box;
     padding: 0.5em 1.33em;
     background: var(--bg-light);
     border: var(--border);
@@ -101,4 +102,9 @@ textarea {
 
 svg {
     fill: var(--text);
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent);
 }

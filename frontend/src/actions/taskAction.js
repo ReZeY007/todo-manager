@@ -42,7 +42,7 @@ export default async function taskAction({ request, params }) {
       };
 
       taskData = Object.fromEntries(
-        Object.entries(taskData).filter(([_, v]) => v !== null),
+        Object.entries(taskData).filter(([, v]) => v !== null),
       );
 
       try {

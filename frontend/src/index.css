@@ -35,13 +35,13 @@ body,
     background: var(--bg);
     border: var(--border);
     border-radius: var(--border-radius);
+    transition:
+        background 0.2s ease-in-out,
+        border 0.2s ease-in-out;
 
     &.hv:hover {
         background: var(--bg-hover);
         border: var(--border-accent);
-        transition:
-            background 0.2s ease-in-out,
-            border 0.2s ease-in-out;
     }
 }
 

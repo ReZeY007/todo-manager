@@ -1,4 +1,4 @@
-import { getUser } from "../utils/api/user";
+import { getUser } from "../api/user";
 
 export default async function userLoader() {
   try {

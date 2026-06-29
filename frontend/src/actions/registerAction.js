@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import { register } from "../utils/api/auth";
+import { register } from "../api/auth";
 
 export default async function registerAction({ request }) {
   const formData = await request.formData();

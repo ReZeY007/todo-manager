@@ -1,5 +1,5 @@
 import { NavLink, useSubmit } from "react-router";
-import Checkbox from "../common/formFields/Checkbox";
+import { Checkbox } from "../../components/shared/";
 import "./TaskTile.css";
 
 function TaskTile({ task }) {

@@ -1,4 +1,4 @@
-import { getTasks } from "../utils/api/tasks";
+import { getTasks } from "../api/tasks";
 
 export default function homeLoader() {
   const lists = getTasks().then((data) => {

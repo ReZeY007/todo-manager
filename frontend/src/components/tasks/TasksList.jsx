@@ -1,4 +1,4 @@
-import TaskTile from "./TaskTile";
+import { TaskTile } from "../../containers/tasks";
 
 function TasksList({ list }) {
   return (

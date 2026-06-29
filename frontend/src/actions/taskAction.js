@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import { updateTask, deleteTask, patchTask } from "../utils/api/tasks";
+import { updateTask, deleteTask, patchTask } from "../api/tasks";
 
 export default async function taskAction({ request, params }) {
   const { taskId } = params;

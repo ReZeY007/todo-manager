@@ -1,5 +1,5 @@
 import { Outlet, useLoaderData, useNavigate } from "react-router";
-import UserProvider from "../contexts/UserContext";
+import UserProvider from "../../contexts/UserContext";
 import { useEffect } from "react";
 
 function Root() {

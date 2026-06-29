@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { useLoaderData, Await } from "react-router";
-import TasksList from "../components/tasks/TasksList";
-import LoadingMessage from "../components/common/LoadingMessage";
+import { TasksList } from "../components/tasks";
+import { LoadingMessage } from "../components/shared/";
 import "./Home.css";
 
 function Home() {

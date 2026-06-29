@@ -1,4 +1,4 @@
-import { getTasks } from "../utils/api/tasks";
+import { getTasks } from "../api/tasks";
 
 export default async function newListLoader() {
   try {

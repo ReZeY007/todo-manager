@@ -5,7 +5,7 @@ import loginAction from "../actions/loginAction";
 import registerAction from "../actions/registerAction";
 import logoutAction from "../actions/logoutAction";
 
-export const auth = {
+const auth = {
   element: <Auth />,
   children: [
     {
@@ -24,3 +24,5 @@ export const auth = {
     },
   ],
 };
+
+export default auth;

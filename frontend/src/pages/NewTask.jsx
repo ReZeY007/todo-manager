@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLoaderData, Form } from "react-router";
 import "./Task.css";
 
-function Task() {
+function NewTask() {
   const loaderData = useLoaderData();
   const [editedTask, setEditedTask] = useState(loaderData?.taskData);
   const [lastLoadedId, setLastLoadedId] = useState(loaderData?.taskData?.id);
@@ -18,7 +18,7 @@ function Task() {
 
   return (
     <div className="task block">
-      <Form action="/tasks/" method="PUT" className="task-form">
+      <Form action="/tasks" method="POST" className="task-form">
         <div className="task__top">
           <input
             className="task__title"
@@ -45,4 +45,4 @@ function Task() {
   );
 }
 
-export default Task;
+export default NewTask;

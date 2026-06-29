@@ -1,5 +1,5 @@
 import { redirect } from "react-router";
-import { logout } from "../utils/api/auth";
+import { logout } from "../api/auth";
 
 export default async function logoutAction() {
   try {

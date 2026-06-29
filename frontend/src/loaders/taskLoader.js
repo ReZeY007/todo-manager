@@ -1,4 +1,4 @@
-import { getTask } from "../utils/api/tasks";
+import { getTask } from "../api/tasks";
 
 export default async function taskLoader({ params }) {
   const taskId = params.taskId;

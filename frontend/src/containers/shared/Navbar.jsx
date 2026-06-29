@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink, useSubmit } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
-import Popover from "./Popover";
+import { Popover } from "../../components/shared/";
 import "./Navbar.css";
 
 function Navbar() {

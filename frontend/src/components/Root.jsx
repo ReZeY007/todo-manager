@@ -1,4 +1,4 @@
-import { Outlet, replace, useLoaderData, useNavigate } from "react-router";
+import { Outlet, useLoaderData, useNavigate } from "react-router";
 import UserProvider from "../contexts/UserContext";
 import { useEffect } from "react";
 

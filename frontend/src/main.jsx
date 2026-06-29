@@ -14,6 +14,8 @@ import taskAction from "./actions/taskAction.js";
 import createTaskAction from "./actions/createTaskAction.js";
 import "./utils/api/global.js";
 import "./index.css";
+import NewList from "./pages/NewList.jsx";
+import newListLoader from "./loaders/newListLoader.js";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,11 @@ const router = createBrowserRouter([
             element: <Task />,
             loader: taskLoader,
             action: taskAction,
+          },
+          {
+            path: "lists",
+            element: <NewList />,
+            loader: newListLoader,
           },
           auth,
         ],

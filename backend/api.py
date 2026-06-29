@@ -117,23 +117,56 @@ def get_user():
 def tasks():
     if request.method == "GET":
         session = create_session()
-        tasks = session.query(Task).filter_by(user_id=get_jwt_identity()).all()
-        session.close()
+        uncategorized_tasks = (
+            session.query(Task)
+            .filter_by(user_id=get_jwt_identity(), list_id=None)
+            .all()
+        )
+        lists = session.query(List).filter_by(user_id=get_jwt_identity()).all()
 
-        json_list = list(
+        lists_json = list(
             map(
-                lambda task: {
-                    "id": task.id,
-                    "title": task.title,
-                    "description": task.description,
-                    "isCompleted": task.is_completed,
-                    "listId": task.list_id,
+                lambda tasksList: {
+                    "id": tasksList.id,
+                    "title": tasksList.title,
+                    "tasks": list(
+                        map(
+                            lambda task: {
+                                "id": task.id,
+                                "title": task.title,
+                                "description": task.description,
+                                "isCompleted": task.is_completed,
+                                "listId": task.list_id,
+                            },
+                            tasksList.tasks,
+                        )
+                    ),
                 },
-                tasks,
+                lists,
             )
         )
+        lists_json.append(
+            {
+                "id": None,
+                "title": "Uncategorized",
+                "tasks": list(
+                    map(
+                        lambda task: {
+                            "id": task.id,
+                            "title": task.title,
+                            "description": task.description,
+                            "isCompleted": task.is_completed,
+                            "listId": task.list_id,
+                        },
+                        uncategorized_tasks,
+                    )
+                ),
+            }
+        )
 
-        return jsonify({"tasks": json_list}), 200
+        session.close()
+
+        return jsonify({"tasks": lists_json}), 200
     elif request.method == "POST":
         session = create_session()
         task_data = request.get_json()
@@ -157,11 +190,15 @@ def tasks():
 def task(task_id):
     if request.method == "GET":
         session = create_session()
-        task = session.query(Task).filter_by(id=task_id).first()
+        task = (
+            session.query(Task)
+            .filter_by(id=task_id, user_id=get_jwt_identity())
+            .first()
+        )
 
         if not (task):
             session.close()
-            return jsonify({"msg", "No task with this ID"}), 404
+            return jsonify({"msg", "No task with this ID or it's not yours"}), 404
 
         json_task = jsonify(
             {
